@@ -3,6 +3,10 @@ OLDPATH=$PATH
 requested=$(ls /workspace/envs/ )
 CURDIR=$(pwd)
 GID=$(stat --format=%g /workspace)
+for folder in "archives envs kernels notebooks"; do
+        mkdir -p /workspace/$folder
+done
+
 install.sh
 for e in $requested; do
         #filename=$(basename $e .txt)

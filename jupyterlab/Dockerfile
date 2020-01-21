@@ -7,10 +7,13 @@ RUN useradd -ms /bin/bash jupyter \
                                                                                 git \
                                                                                 gosu \
                                                                                 make \
+										npm \
+										nodejs \
                                                                                 python3 \
                                                                                 python3-dev \
                                                                                 python3-pip \
                                                                                 python3-venv \
+                                                                                yarnpkg \
         && mkdir -p /kernels \
         && mkdir -p /workspace/notebooks \
         && mkdir /workspace/envs \
@@ -24,12 +27,14 @@ RUN useradd -ms /bin/bash jupyter \
 	&& cd /kernels \
 	&& bash -c "python3 -m venv raw \
                 && source /kernels/raw/bin/activate \
-                && pip3 install --no-cache-dir ipykernel \
+                && pip3 install --no-cache-dir ipykernel ipywidgets\
                 && ipython kernel install --name=raw" \
         && bash -c "python3 -m venv stats \
                 && source  /kernels/stats/bin/activate \
-                && pip3 install --no-cache-dir ipykernel matplotlib pandas networkx \
+                && pip3 install --no-cache-dir ipykernel ipywidgets matplotlib pandas networkx \
                 && ipython kernel install --name=stats" \
+        && jupyter labextension install @lckr/jupyterlab_variableinspector \
+	&& jupyter labextension install @jupyter-widgets/jupyterlab-manager \
 	&& mkdir -p /home/jupyter/.jupyter/lab/user-settings/\@jupyterlab/apputils-extension/ \
 	&& cp /root/.jupyter/lab/user-settings/\@jupyterlab/apputils-extension/themes.jupyterlab-settings /home/jupyter/.jupyter/lab/user-settings/\@jupyterlab/apputils-extension/themes.jupyterlab-settings \
         && chown -R jupyter /workspace/ \
