@@ -5,6 +5,7 @@ RUN useradd -ms /bin/bash jupyter \
         && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends busybox \
 										curl\
                                                                                 gcc \
+                                                                                g++ \
                                                                                 git \
                                                                                 gosu \
                                                                                 make \
