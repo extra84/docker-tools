@@ -1,0 +1,11 @@
+let g:rustfmt_autosave = 1
+call plug#begin('~/.vim/plugged')
+
+" Make sure you use single quotes
+Plug 'rust-lang/rust.vim'
+Plug 'vim-syntastic/syntastic'
+Plug 'preservim/tagbar'
+Plug 'cespare/vim-toml'
+" Initialize plugin system
+call plug#end()
+
